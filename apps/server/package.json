@@ -2,6 +2,12 @@
   "name": "@just-sell/server",
   "version": "0.0.1",
   "private": true,
+  "scripts": {
+    "migrate:up": "node -r ts-node/register migrate.ts up",
+    "migrate:down": "node -r ts-node/register migrate.ts down",
+    "migrate:pending": "node -r ts-node/register migrate.ts pending",
+    "migrate:executed": "node -r ts-node/register migrate.ts executed"
+  },
   "nx": {
     "targets": {
       "build": {
@@ -85,6 +91,16 @@
           "build",
           "prune"
         ]
+      },
+      "migrate:db": {
+        "executor": "nx:run-commands",
+        "options": {
+          "command": "node -r ts-node/register migrate.ts",
+          "args": [
+            "up"
+          ],
+          "cwd": "apps/server"
+        }
       }
     }
   },
@@ -106,12 +122,14 @@
     "rxjs": "^7.8.0",
     "sequelize": "^6.37.7",
     "sequelize-typescript": "^2.1.6",
+    "dotenv": "^16.4.7",
     "tslib": "^2.3.0",
     "umzug": "^3.8.2"
   },
   "devDependencies": {
     "@nestjs/testing": "^11.0.0",
     "@types/passport-jwt": "^4.0.1",
-    "sequelize-cli": "^6.6.3"
+    "sequelize-cli": "^6.6.3",
+    "ts-node": "^10.9.2"
   }
 }

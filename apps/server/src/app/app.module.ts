@@ -7,7 +7,7 @@ import configuration, { ConfigType } from '../config/configuration';
 import { Addresses } from '../models/address.model';
 import { Users } from '../models/user.model';
 import { Sellers } from '../models/vendor.model';
-import { UsersModule } from '../user/users.module';
+import { UsersModule } from '../modules/user/users.module';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 
