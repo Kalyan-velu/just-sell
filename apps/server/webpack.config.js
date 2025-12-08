@@ -22,4 +22,17 @@ module.exports = {
       sourceMaps: true,
     }),
   ],
+  ignoreWarnings: [
+    {
+      module: /sequelize-typescript/,
+      message:
+        /Critical dependency: the request of a dependency is an expression/,
+    },
+  ],
+  // this to prevent webpack from bundling pg
+  externals: {
+    pg: 'commonjs pg',
+    'pg-hstore': 'commonjs pg-hstore',
+    'pg-native': 'commonjs pg-native',
+  },
 };

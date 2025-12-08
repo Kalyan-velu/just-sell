@@ -30,6 +30,12 @@ export class Users extends Model<Users> {
   @Column({ type: DataType.STRING, allowNull: true })
   email!: string | null;
 
+  @Column({ type: DataType.STRING, allowNull: false })
+  password!: string;
+
+  @Column({ type: DataType.STRING, allowNull: true })
+  refreshToken!: string | null;
+
   @Column({
     type: DataType.BOOLEAN,
     defaultValue: false,

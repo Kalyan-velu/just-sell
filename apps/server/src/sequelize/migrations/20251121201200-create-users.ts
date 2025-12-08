@@ -1,6 +1,9 @@
 import { QueryInterface, DataTypes, Sequelize } from 'sequelize';
 
-export async function up(queryInterface: QueryInterface, SequelizeLib: typeof Sequelize) {
+export async function up(
+  queryInterface: QueryInterface,
+  SequelizeLib: typeof Sequelize
+) {
   await queryInterface.createTable('users', {
     id: {
       type: DataTypes.UUID,
@@ -17,6 +20,14 @@ export async function up(queryInterface: QueryInterface, SequelizeLib: typeof Se
       type: DataTypes.STRING,
       allowNull: true,
       unique: true,
+    },
+    password: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    refreshToken: {
+      type: DataTypes.STRING,
+      allowNull: true,
     },
     isOnboard: {
       type: DataTypes.BOOLEAN,

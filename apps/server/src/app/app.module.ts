@@ -7,9 +7,10 @@ import configuration, { ConfigType } from '../config/configuration';
 import { Addresses } from '../models/address.model';
 import { Users } from '../models/user.model';
 import { Sellers } from '../models/vendor.model';
-import { UsersModule } from '../modules/user/users.module';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
+import { AuthModule } from '../modules/auth/auth.module';
+import { JwtStrategy } from '../modules/auth/strategies/jwt.strategy';
 
 @Module({
   imports: [
@@ -19,6 +20,7 @@ import { AppService } from './app.service';
       inject: [ConfigService],
       useFactory: (config: ConfigService) => {
         const pg = config.get<ConfigType['pg']>('pg');
+        console.log('PG:', pg);
         return {
           dialect: 'postgres',
           host: pg?.host,
@@ -31,7 +33,6 @@ import { AppService } from './app.service';
         };
       },
     }),
-    UsersModule,
     PassportModule,
     JwtModule.registerAsync({
       imports: [ConfigModule],
@@ -43,8 +44,9 @@ import { AppService } from './app.service';
     }),
     SequelizeModule.forFeature([Users]),
     PassportModule.register({ defaultStrategy: 'jwt' }),
+    AuthModule,
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [AppService, JwtStrategy],
 })
 export class AppModule {}

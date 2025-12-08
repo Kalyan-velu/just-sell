@@ -1,3 +1,5 @@
+import { JwtModuleAsyncOptions, JwtModuleOptions } from '@nestjs/jwt';
+
 export interface ConfigType {
   pg: {
     host: string;
@@ -6,10 +8,7 @@ export interface ConfigType {
     password: string;
     database: string;
   };
-  jwt: {
-    secret: string;
-    maxAge?: number;
-  };
+  jwt: JwtModuleOptions;
 }
 export default (): ConfigType => ({
   pg: {
@@ -21,6 +20,8 @@ export default (): ConfigType => ({
   },
   jwt: {
     secret: process.env.JWT_SECRET ?? 'secret',
-    maxAge: Number(process.env.JWT_MAX_AGE ?? '3600'),
+    signOptions: {
+      expiresIn: '1d',
+    },
   },
 });
