@@ -9,7 +9,7 @@ import {
   Table,
   Unique,
 } from 'sequelize-typescript';
-import { Sellers } from './vendor.model';
+import type { Sellers } from './vendor.model';
 
 @Table({
   tableName: 'users',
@@ -47,6 +47,6 @@ export class Users extends Model<Users> {
   @Column({ type: DataType.DATE, allowNull: false })
   timestamp!: Date;
 
-  @HasOne(() => Sellers)
+  @HasOne('Sellers', 'userId')
   sellers?: Sellers;
 }
