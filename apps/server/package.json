@@ -126,7 +126,7 @@
     "pg-hstore": "^2.3.4",
     "reflect-metadata": "^0.1.14",
     "rxjs": "^7.8.0",
-    "sequelize": "^6.37.7",
+    "sequelize": "^6.37.8",
     "sequelize-typescript": "^2.1.6",
     "server": "^1.0.42",
     "tslib": "^2.3.0",
